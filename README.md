@@ -21,5 +21,7 @@ These are the main features **Whisper** provides:
 Special thanks to these awesome projects for making **Whisper** possible:
 
   - SQLite 3
+  - Net::SMTP::TLS
   - MIME::Lite
   - File::MimeInfo
+  - Try::Tiny
