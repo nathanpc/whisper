@@ -5,7 +5,7 @@ A simple and awesome utility written in Perl to send documents to a Kindle.
 
 ## Setup
 
-Before you start using **Whisper** you have to rename the `config_template.yaml` to `config.yaml` and edit the required fields to setup your email.
+Before you start using **Whisper** you have to rename the `config_template.yml` to `config.yml` and edit the required fields to setup your email.
 
 
 ## Main features

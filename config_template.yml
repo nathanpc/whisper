@@ -1,0 +1,6 @@
+---
+email:
+	smtp_server: smtp.gmail.com
+	address: "test@gmail.com"
+	username: "test@gmail.com"
+	password: "helloworld"
