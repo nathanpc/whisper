@@ -20,8 +20,8 @@ These are the main features **Whisper** provides:
 
 Special thanks to these awesome projects for making **Whisper** possible:
 
-  - SQLite 3
-  - Net::SMTP::TLS
-  - MIME::Lite
-  - File::MimeInfo
-  - Try::Tiny
+  - [SQLite](http://www.sqlite.org)
+  - [Net::SMTP::TLS](http://search.cpan.org/~awestholm/Net-SMTP-TLS-0.12/lib/Net/SMTP/TLS.pm)
+  - [MIME::Lite](http://search.cpan.org/~rjbs/MIME-Lite-3.029/lib/MIME/Lite.pm)
+  - [File::MimeInfo](http://search.cpan.org/~michielb/File-MimeInfo-0.17/lib/File/MimeInfo.pm)
+  - [Try::Tiny](http://search.cpan.org/~doy/Try-Tiny-0.16/lib/Try/Tiny.pm)
