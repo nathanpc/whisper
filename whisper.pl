@@ -12,6 +12,7 @@ use Data::Dumper;
 
 use Getopt::Long;
 use YAML::Tiny;
+use Try::Tiny;
 
 use Log;
 use SendToKindle;
@@ -54,9 +55,9 @@ try {
 	$kindle->send($account, $convert);
 
 	# Log the action.
-	$log->send($self->{file_name}, $account, $convert, "Sent");
+	$log->send($file, $account, $convert, "Sent");
 } catch {
 	# Log the error.
-	$log->send($self->{file_name}, $account, $convert, "Failed");
+	$log->send($file, $account, $convert, "Failed");
 	print "There was an error while trying to send the document: $_";
 };

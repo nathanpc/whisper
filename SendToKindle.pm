@@ -10,12 +10,10 @@ package Whisper::SendToKindle;
 
 use strict;
 use warnings;
-use Data::Dumper;
 
 use Net::SMTP::TLS;
 use MIME::Lite;
 use File::MimeInfo;
-use Try::Tiny;
 
 # Constructor.
 sub new {
@@ -36,6 +34,7 @@ sub new {
 # Sends the document.
 sub send {
 	my ($self, $account, $convert) = @_;
+	$account = "$account\@kindle.com";
 
 	# Detect the MIME type of the attachment.
 	my $mime = mimetype($self->{file_name});
@@ -54,12 +53,18 @@ sub send {
 	$email->to($account);
 	$email->data();
 
+	# Prepare the email subject.
+	my $subject = "";
+	if ($convert) {
+		$subject = "convert";
+	}
+
 	# Setup MIME::Lite.
 	my $msg = MIME::Lite->new(
         From    => $self->{address},
         To      => $account,
-        Subject => "", # TODO: The convert thingy.
-        Type    => $mime,
+        Subject => $subject,
+        Type    => "application/octet-stream",
         Path    => $self->{file_name});
 
 	# Send email.
