@@ -12,6 +12,8 @@ use Data::Dumper;
 
 use Getopt::Long;
 use YAML::Tiny;
+
+use Log;
 use SendToKindle;
 
 # Prints the help message.
@@ -43,4 +45,18 @@ my $kindle = Whisper::SendToKindle->new(
 	$email->{port},
 	$email->{username},
 	$email->{password});
-$kindle->send($account, $convert);
+
+# Setup logging.
+my $log = new Whisper::Log();
+
+# Send the document.
+try {
+	$kindle->send($account, $convert);
+
+	# Log the action.
+	$log->send($self->{file_name}, $account, $convert, "Sent");
+} catch {
+	# Log the error.
+	$log->send($self->{file_name}, $account, $convert, "Failed");
+	print "There was an error while trying to send the document: $_";
+};

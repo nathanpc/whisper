@@ -15,7 +15,7 @@ use Data::Dumper;
 use Net::SMTP::TLS;
 use MIME::Lite;
 use File::MimeInfo;
-use Log;
+use Try::Tiny;
 
 # Constructor.
 sub new {
@@ -43,54 +43,29 @@ sub send {
 		$mime = File::MimeInfo->default($self->{file_name});
 	}
 
+	# Setup Net::SMTP.
 	my $email = new Net::SMTP::TLS(
-		$mh,
-		Port => $pt,
-		User => $un,
-		Password => $pw,
-		Timeout => 60) or die "Cannot create a TLS mailer instance!\n";
+		$self->{smtp_server},
+		Port => $self->{smtp_port},
+		User => $self->{smtp_user},
+		Password => $self->{smtp_password},
+		Timeout => 60);
+	$email->mail($self->{address});
+	$email->to($account);
+	$email->data();
 
-	# Setup and send email.
-	my $email = MIME::Lite->new(
+	# Setup MIME::Lite.
+	my $msg = MIME::Lite->new(
         From    => $self->{address},
         To      => $account,
         Subject => "", # TODO: The convert thingy.
         Type    => $mime,
         Path    => $self->{file_name});
-	$email->send("smtp", $self->{smtp_server},
-				 Port => 587,
-				 Auth => "LOGIN",
-				 AuthUser => $self->{smtp_user},
-				 AuthPass => $self->{smtp_password},
-				 Debug => 1);
 
-	# Setup Mail:Sender
-	#my $sender = new Mail::Sender({
-	#	from => $self->{address}
-	#});
-
-	# Start a multipart email.
-	#$sender->OpenMultipart({
-	#	to => $account,
-	#	subject => "",
-	#});
-	#$sender->Body;
-	#$sender->SendLine("");
-
-	# Add an attachment.
-	#$sender->SendFile({
-	#	description => 'Raw Data File',
-	#	encoding => '7BIT',
-	#	file => $tempfile,
-	#});
-
-	# Clean up the mess.
-	#$sender->Close;
-
-	# TODO: Get sent status (Sent or failed) and log.
-	# Log the action.
-	my $log = new Whisper::Log();
-	$log->send($self->{file_name}, $account, $convert, "Testing");
+	# Send email.
+	$email->datasend($msg->as_string);
+	$email->dataend();
+	$email->quit();
 }
 
 1;
