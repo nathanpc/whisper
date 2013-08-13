@@ -15,7 +15,7 @@ use YAML::Tiny;
 use Try::Tiny;
 
 use Log;
-use SendToKindle;
+use Amazon::SendToKindle;
 
 # Prints the help message.
 sub HelpMessage {
@@ -39,7 +39,7 @@ $config = YAML::Tiny->read("config.yml");
 my $email = $config->[0]->{email};
 
 # Setup the Kindle and send.
-my $kindle = Whisper::SendToKindle->new(
+my $kindle = Amazon::SendToKindle->new(
 	$file,
 	$email->{address},
 	$email->{smtp_server},

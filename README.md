@@ -16,6 +16,12 @@ These are the main features **Whisper** provides:
   - Web interface for sending documents remotely
   - Multiple accounts
 
+
+## "Sent to Kindle" module
+
+For this project I wrote [Amazon::SendToKindle](http://search.cpan.org/~nathanpc/Amazon-SendToKindle-0.2/lib/Amazon/SendToKindle.pm), so if you want to add the "Send to Kindle" functionality to your project too, you can.
+
+
 ## Requiremets
 
 Special thanks to these awesome projects for making **Whisper** possible:
@@ -25,3 +31,4 @@ Special thanks to these awesome projects for making **Whisper** possible:
   - [MIME::Lite](http://search.cpan.org/~rjbs/MIME-Lite-3.029/lib/MIME/Lite.pm)
   - [File::MimeInfo](http://search.cpan.org/~michielb/File-MimeInfo-0.17/lib/File/MimeInfo.pm)
   - [Try::Tiny](http://search.cpan.org/~doy/Try-Tiny-0.16/lib/Try/Tiny.pm)
+  - [Amazon::SendToKindle](http://search.cpan.org/~nathanpc/Amazon-SendToKindle-0.2/lib/Amazon/SendToKindle.pm)
